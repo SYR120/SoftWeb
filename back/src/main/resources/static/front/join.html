@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>join</title>
+    <script src="https://kit.fontawesome.com/289a62abf7.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <style>
+        .button_join1 {
+            background-color:rgba(255, 255, 255, 0);
+            height:40px;
+            width:200px;
+            color:rgb(25, 25, 52);
+            border: 1px solid rgba(0, 0, 0, 0.25);
+            font-size: small;
+            font-weight: 300;   
+            margin-bottom: 10px;
+            border-radius: 4px;
+            font-family: 'Pretendard-Regular';
+            padding-left: 10px; /* 내부 텍스트 여백 */
+        }
+        input:focus {
+            outline: none;
+            background-color: rgba(192, 201, 198, 0.15);
+        }
+        .margin2 { /* 사용자님의 원본 .margin2 스타일 유지 */
+            position: absolute;
+            margin-left: 5px;
+            margin-top:13px;
+            cursor: pointer; /* 클릭 가능하게 보이도록 추가 */
+        }
+        .font1 {
+            color:rgb(127,127,127);
+            font-size: 12px;
+        }
+        /* content_w 클래스는 현재 join.html에서 사용되지 않으므로 제거 가능 */
+        /* .content_w{
+            display: flex; 
+            gap: 10px; 
+            margin-bottom: 10px;
+        } */
+        .green {
+            color:rgb(81,123,95);
+            font-size: large;
+            font-weight: 700;
+        }
+        /* 비밀번호 placeholder를 위한 스타일 */
+        #password::placeholder,
+        #pwcheck::placeholder {
+            font-size: 11px; /* placeholder 폰트 크기를 약간 줄임 */
+            /* 필요시 color: #aaa; 등 색상 조정 가능 */
+        }
+        .message-feedback { /* 이전 답변의 메시지 div 스타일은 유지 */
+            font-size: 12px;
+            margin-top: -8px;
+            margin-bottom: 8px;
+            width: 200px; 
+            text-align: left;
+            padding-left: 5px;
+            min-height: 1.2em;
+        }
+        .button_final {
+            background-color:rgb(183, 228, 206);
+            height:45px;
+            width:205px;
+            color:rgb(25, 54, 52);
+            border: none;
+            font-size: medium;
+            font-weight: 700;   
+            border-radius: 4px;
+            font-family: 'Pretendard-Regular';
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        .button_final:hover {
+            background-color: rgb(159, 211, 189);
+        }
+    </style>
+  <script type="module" crossorigin src="/assets/approot-DZOVlW9M.js"></script>
+  <link rel="stylesheet" crossorigin href="/css/approot.B6dGfGpS.css">
+</head>
+<body style="background-color: rgb(248, 248, 248);">
+    <div id="root"></div>
+
+    <div class="middle">
+        <div class="box" style="height: auto; background-color: rgb(255, 255, 255); padding-top: 20px; padding-bottom: 20px;">
+            <div class="green">회원가입</div>
+            <hr style="background-color: rgba(163, 163, 163, 0.5);  border: none; height: 1px; width: 80%; margin-bottom: 15px;"/>
+            &nbsp;
+            
+            <div>
+                <input class="button_join1" type="text" id="id" placeholder="아이디 (8-20자, 영문/숫자/-/_)" autofocus/>
+                <label class="font1 drag1 margin2" style="text-decoration: underline;" id="idCheckLabel" onclick="checking()">중복 확인</label> 
+            </div>
+            <div id="idMessage" class="message-feedback"></div>
+
+            <input class="button_join1" type="password" id="password" placeholder="비밀번호 (8-20자, 영/숫자/특수문자 조합)"/> 
+            <input class="button_join1" type="password" id="pwcheck" placeholder="비밀번호 확인"/> 
+            <div id="pwMessage" class="message-feedback"></div>
+            
+            <div>
+                <input class="button_join1" type="text" id="email" placeholder="이메일"/> 
+                <label class="font1 drag1 margin2" style="text-decoration: underline;" id="emailVerificationLabel" onclick="emailalert()">인증 번호 전송</label>
+            </div>
+            <div id="emailMessage" class="message-feedback"></div>
+            
+            <input class="button_join1" type="text" id="number" placeholder="인증번호 (4자리 숫자)"/>
+            <input class="button_join1" type="text" id="nickname" placeholder="닉네임 (4-20자)"/> 
+            <div id="nicknameMessage" class="message-feedback"></div>
+
+            <button class="button_final drag1" onclick="join()" style="margin-top:10px;">회원가입</button>
+        </div>
+    </div>
+</body>
+<script>
+    // JavaScript 로직은 이전 답변 #37의 join.html 스크립트 내용과 동일하게 유지합니다.
+    // (idCheckedAndAvailable, emailVerificationSent 플래그 사용 및 API 호출 로직 포함)
+    let idCheckedAndAvailable = false;
+    let emailVerificationSent = false;
+
+    async function checking() {
+        const loginIdInput = document.getElementById("id");
+        const idCheckLabel = document.getElementById("idCheckLabel");
+        const idMessageDiv = document.getElementById("idMessage");
+        const loginId = loginIdInput.value.trim();
+
+        idCheckedAndAvailable = false;
+        if(idMessageDiv) idMessageDiv.textContent = '';
+        idCheckLabel.innerText = "중복 확인"; 
+        idCheckLabel.style.color = "rgb(127,127,127)";
+
+        if (loginId.length < 8 || loginId.length > 20) {
+            alert("아이디는 8자 이상 20자 이하로 입력해주세요."); loginIdInput.focus(); return;
+        }
+        if (/[^A-Za-z0-9\-_]/.test(loginId)) {
+            alert("아이디는 영어, 숫자, 대시(-), 언더스코어(_)만 사용 가능합니다."); loginIdInput.focus(); return;
+        }
+
+        idCheckLabel.innerText = "확인 중...";
+        idCheckLabel.style.color = "orange";
+
+        try {
+            const response = await fetch(`/api/auth/check-login-id?loginId=${encodeURIComponent(loginId)}`);
+            const result = await response.json();
+
+            if (response.ok && result.status === 200) {
+                if (result.data === true) {
+                    idCheckLabel.innerText = "사용 가능"; idCheckLabel.style.color = "green";
+                    idCheckedAndAvailable = true;
+                } else {
+                    idCheckLabel.innerText = "사용 불가"; idCheckLabel.style.color = "red";
+                    alert(result.message || "이미 사용 중인 아이디입니다.");
+                }
+            } else {
+                idCheckLabel.innerText = "확인 실패"; idCheckLabel.style.color = "red";
+                alert(result.message || "아이디 중복 확인 중 오류가 발생했습니다.");
+            }
+        } catch (error) {
+            console.error("아이디 중복 확인 중 오류:", error);
+            idCheckLabel.innerText = "확인 오류"; idCheckLabel.style.color = "red";
+            alert("아이디 중복 확인 중 네트워크 오류가 발생했습니다.");
+        }
+    }
+
+    async function emailalert() {
+        const emailInput = document.getElementById("email");
+        const emailVerificationLabel = document.getElementById("emailVerificationLabel");
+        const emailMessageDiv = document.getElementById("emailMessage");
+        const email = emailInput.value.trim();
+
+        if(emailMessageDiv) emailMessageDiv.textContent = '';
+        emailVerificationLabel.innerText = "인증번호 전송";
+        emailVerificationLabel.style.color = "rgb(127,127,127)";
+
+        if (email.length < 1) { alert("이메일을 입력해주세요."); emailInput.focus(); return; }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert("올바른 이메일 형식이 아닙니다."); emailInput.focus(); return; }
+
+        emailVerificationLabel.innerText = "전송 중...";
+        emailVerificationLabel.style.color = "orange";
+
+        try {
+            const response = await fetch('/api/auth/send-verification-email', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: email })
+            });
+            const result = await response.json();
+
+            if (response.ok && result.status === 200) {
+                alert(result.message || "인증번호가 발송되었습니다. 이메일을 확인해주세요.");
+                emailVerificationLabel.innerText = "재전송"; emailVerificationLabel.style.color = "green";
+                emailVerificationSent = true;
+                document.getElementById("number").focus();
+            } else {
+                emailVerificationLabel.innerText = "전송 실패"; emailVerificationLabel.style.color = "red";
+                alert(result.message || `인증번호 발송에 실패했습니다 (오류: ${result.code || response.status})`);
+            }
+        } catch (error) {
+            console.error("이메일 인증번호 발송 중 오류:", error);
+            emailVerificationLabel.innerText = "전송 오류"; emailVerificationLabel.style.color = "red";
+            alert("인증번호 발송 처리 중 오류가 발생했습니다.");
+        }
+    }
+
+    async function join() {
+        const idInput = document.getElementById("id");
+        const passwordInput = document.getElementById("password");
+        const pwcheckInput = document.getElementById("pwcheck");
+        const emailInput = document.getElementById("email");
+        const numberInput = document.getElementById("number");
+        const nicknameInput = document.getElementById("nickname");
+
+        if (!idCheckedAndAvailable) { alert("아이디 중복 확인을 완료하고 사용 가능한 아이디를 입력해주세요."); idInput.focus(); return; }
+        if (idInput.value.length < 8 || idInput.value.length > 20 || /[^A-Za-z0-9\-_]/.test(idInput.value)) {
+             alert("아이디 형식을 다시 확인해주세요 (8~20자, 영문/숫자/-_)."); idInput.focus(); return;
+        }
+        if (passwordInput.value.length < 8 || passwordInput.value.length > 20 || !/^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,20}$/.test(passwordInput.value)) {
+            alert("비밀번호는 영문, 숫자, 특수문자를 최소 1개 이상 포함하여 8~20자로 입력해주세요."); passwordInput.focus(); return;
+        }
+        if (passwordInput.value !== pwcheckInput.value) { alert("비밀번호가 일치하지 않습니다."); pwcheckInput.focus(); return; }
+        if (emailInput.value.length < 1 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value)) {
+             alert("올바른 이메일 형식이 아닙니다."); emailInput.focus(); return;
+        }
+        if (!emailVerificationSent) { alert("이메일 인증번호를 먼저 발송하고 확인해주세요."); emailInput.focus(); return; } // 혹은 이메일 발송 상태를 더 명확히 안내
+        if (numberInput.value.length !== 4 || !/^\d{4}$/.test(numberInput.value)) { alert("인증번호는 4자리 숫자여야 합니다."); numberInput.focus(); return; }
+        if (nicknameInput.value.length < 4 || nicknameInput.value.length > 20 || /[^A-Za-z0-9\uAC00-\uD7A3\-_]/.test(nicknameInput.value)) {
+             alert("닉네임은 4자 이상 20자 이하, 한글/영문/숫자/-_ 만 사용 가능합니다."); nicknameInput.focus(); return;
+        }
+
+        const signUpData = {
+            loginId: idInput.value,
+            password: passwordInput.value,
+            nickname: nicknameInput.value,
+            email: emailInput.value,
+            verificationCode: numberInput.value
+        };
+
+        try {
+            const response = await fetch('/api/auth/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(signUpData)
+            });
+            const result = await response.json();
+
+            if (response.status === 201 && result.status === 201) {
+                alert(result.message || "회원가입이 완료되었습니다.");
+                window.location.href = "/front/login.html";
+            } else {
+                let errorMessage = `회원가입 실패 (상태: ${response.status}): ${result.message || '알 수 없는 오류'}`;
+                if (result.errors && Array.isArray(result.errors)) {
+                    errorMessage += "\n상세:\n" + result.errors.map(err => `- '${err.field}': ${err.reason}`).join("\n");
+                }
+                alert(errorMessage);
+            }
+        } catch (error) {
+            console.error("회원가입 중 오류:", error);
+            alert("회원가입 처리 중 오류가 발생했습니다. 네트워크를 확인해주세요.");
+        }
+    }
+</script>
+</html>

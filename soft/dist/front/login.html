@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title> <script src="https://kit.fontawesome.com/289a62abf7.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <style>
+        .button_login1 {
+            background-color:rgba(168, 168, 168, 0);
+            height:40px;
+            width:200px;
+            color:rgb(25, 25, 52);
+            border: 1px solid rgba(180, 180, 180);
+            font-size: small;
+            font-weight: 300;   
+            margin-bottom: 10px;
+            border-radius: 4px;
+            font-family: 'Pretendard-Regular';
+        }
+        input:focus {
+            outline: none;
+            background-color: rgb(245, 245, 245);
+        }
+        .button_naver {
+            background-color:rgb(3, 199, 90);
+            height:40px;
+            width:200px;
+            color:rgb(255, 255, 255);
+            border: none;
+            font-size: medium;
+            font-weight: 200; /* 원본은 700, 일관성을 위해 200으로 보임 */   
+            margin-bottom: 10px;
+            border-radius: 4px;
+            font-family: 'Pretendard-Regular';
+            display:flex;
+            align-items:center;
+            justify-content: center; /* 아이콘과 텍스트 중앙 정렬 */
+        }
+        .button_naver img {
+            margin-right: 8px; /* 아이콘과 텍스트 간격 */
+        }
+        .button_naver:active {
+            background-color: rgb(16, 170, 63);
+        }  
+        .button_kakao {
+            background-color: rgb(254,229,0);
+            height:40px;
+            width:200px;
+            color:rgb(25,25,25);
+            border: none;
+            font-size: medium;
+            font-weight: 200; /* 원본은 700, 일관성을 위해 200으로 보임 */    
+            margin-bottom: 10px;
+            border-radius: 4px;
+            font-family: 'Pretendard-Regular';
+            display:flex;
+            align-items:center;
+            justify-content: center; /* 아이콘과 텍스트 중앙 정렬 */
+        }
+        .button_kakao img {
+            margin-right: 8px; /* 아이콘과 텍스트 간격 */
+        }
+        .button_kakao:active {
+            background-color: rgb(236, 207, 37);
+        }
+        .font1:hover {
+            color: rgb(55,158,144);
+        }
+    </style>
+  <script type="module" crossorigin src="/assets/approot-eWCPX4A1.js"></script>
+  <link rel="stylesheet" crossorigin href="/css/approot.B6dGfGpS.css">
+</head>
+<body style="background-color: rgb(248, 248, 248);">
+    <div id="root"></div>
+
+    <div class="middle">
+        <div class="box">
+            <div class="green">로그인</div>
+            <hr style="background-color: rgba(163, 163, 163, 0.5);  border: none; height: 1px; width: 80%; margin-bottom: 15px;"/>
+            &nbsp;
+
+            <form action="/api/auth/perform_login" method="post" style="display: flex; flex-direction: column; align-items: center;">
+                <input class="button_login1" type="text" id="loginId" name="loginId" placeholder=" 아이디" autofocus required/> 
+                <input class="button_login1" type="password" id="password" name="password" placeholder=" 비밀번호" required/>
+                <button type="submit" class="button_final drag1" style="margin-bottom: 10px;">로그인</button>
+            </form>
+
+            <div class="content_w" style="margin-top: 5px;">
+                <div class="font1 drag1" onclick="window.location.href='join.html';">회원가입</div>
+                <div style="border: 0.1px solid rgba(163, 163, 163, 0.5); height: 100%;"></div>
+                <div class="font1 drag1" onclick="window.location.href='findmyid.html';">아이디 찾기</div>
+                <div style="border: 0.1px solid rgba(163, 163, 163, 0.5);"></div>
+                <div class="font1 drag1" onclick="window.location.href='findmypw.html';">비밀번호 찾기</div>
+            </div>
+            <div style="width:50%; margin-bottom: 10px;">
+                <hr style="background-color: rgba(163, 163, 163, 0.5);  border: none; height: 1px; margin-bottom: 15px;"/>
+            </div>
+
+            <button class="button_naver drag1" onclick="location.href='/oauth2/authorization/naver'"><img src="data:image/png;base64,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" width="25px" height="25px"/> <span>네이버 로그인</span> </button>
+            <button class="button_kakao drag1" onclick="location.href='/oauth2/authorization/kakao'"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAiCAYAAAA3WXuFAAAACXBIWXMAAAsSAAALEgHS3X78AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAACUklEQVRYhcXYzasVdRgH8M+jvSDccBFCoKmLIIiCNiGWrcRFCOGiVwgKyqJFYdFWFP+BwkVBGUq0SAzuwuyFKIikEooiahNBXFIJKuxScVPSb4uZsbp6Xsp7znxhFucw5zyfw5z5/Z5nKolxU1WrsAW34kasxzW4sj3lNH7Ad/gSx/Bukh/HrjEKVFWX4z48gk1YNvYvaHIOR7EPB5Oc+V+gqlqGh7Ab1/5HxKB8337fgSTnxgZV1XV4FRuWCLI4x/BAkm9HgqrqDhzEVRPCdPkV9yZ5ayCoqu7Ca1g+YUyXs7g/yaELQFW1Ce/hiilhupzB5iRHz4OqaiW+xuopY7qcxA1J5jvQs9jRE6bLc0meKqzCHFb0DFrAusIT2NszpsuThTewtW9JmyOlWT3X9C1pc6Lwh783x75zujQ79LTXnkFZKM0dtrZvSZu50uxb9/QtaTNb2I4X+5a0ebgwg+NY2TNmHuu7rWMPdvYM2pNkVwdagc9xfU+Yb3BzkoV/th834UPTv3S/YWOSr7iwQbsdR0y+W+zyO7Ym+eC84SIt7C143eTXppO4M8ln/6o/oMm/Gi/g7glhZvHYxea1oXNZVT2IA0sI+RQ7k7w9sOYI0ON4/hIR8ziM/UneH3XyKNAstg35/E/tMaOZaBc0o/QcvsAn+DjJn+Pqh02ul7XFBi0Dr2BHklPjFrtU0G2amXxxTuDRJG8uJWQc0G7sWvT2fjyd5JdJYEaBPsLG9uVxbB92d0wU1A6OP2v+qC/jmSTzk8YMA83gJc1jk3emAenyF1x69OM6W9mgAAAAAElFTkSuQmCC" width="15px" height="15px"/> <span>카카오 로그인</span> </button>
+        </div>
+    </div>
+</body>
+
+<script>
+    // 로그인 실패 시 (URL에 error=true 파라미터가 있을 경우) 또는 세션 만료 시 알림 표시
+    window.onload = function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('error')) {
+            alert("아이디 또는 비밀번호가 잘못되었습니다. 다시 시도해주세요.");
+            // URL에서 error 파라미터 제거 (새로고침 시 다시 뜨지 않도록)
+            window.history.replaceState({}, document.title, window.location.pathname + window.location.hash); // 해시 유지
+        }
+        if (urlParams.has('expired')) {
+            alert("세션이 만료되었거나 다른 곳에서 로그인하여 기존 세션이 종료되었습니다. 다시 로그인해주세요.");
+            window.history.replaceState({}, document.title, window.location.pathname + window.location.hash); // 해시 유지
+        }
+    };
+
+    // 기존 login(), naverlog(), kakaolog() 함수는 form action과 onclick으로 대체되었으므로 제거하거나 주석 처리합니다.
+    /*
+    async function login(){
+        // 이 함수는 form의 action 속성으로 대체되었습니다.
+        // 프론트엔드 유효성 검사만 남기거나, AJAX 로그인을 구현하려면 더 복잡한 로직이 필요합니다.
+        // 현재는 Spring Security의 formLogin이 처리하므로 JavaScript를 통한 직접 로그인은 불필요합니다.
+    }
+    function naverlog(){ // onclick에서 직접 location.href 사용
+        // window.location.href="/oauth2/authorization/naver";
+    }
+    function kakaolog(){ // onclick에서 직접 location.href 사용
+        // window.location.href="/oauth2/authorization/kakao";
+    }
+    */
+</script>
+</html>

@@ -1,0 +1,42 @@
+# Backend (Spring Boot/Maven)
+back/target/
+back/HELP.md
+back/logs/
+back/*.log
+back/.idea/            # IntelliJ
+back/.project          # Eclipse
+back/.settings/        # Eclipse
+back/.classpath        # Eclipse
+back/*.iml             # IntelliJ
+
+# Frontend (Node/Vite)
+# vite.config.js에서 outDir을 back/src/main/resources/static 으로 직접 지정했으므로,
+# static 폴더 자체를 ignore 하지 않습니다. 빌드된 프론트엔드 결과물이 포함되어야 합니다.
+# front/dist/         # 만약 vite가 로컬 dist에도 빌드한다면 추가 (현재 설정에는 해당 없음)
+front/node_modules/
+front/.env*
+front/.DS_Store
+*.DS_Store
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+logs/
+
+# IDE specific
+.idea/
+.vscode/
+*.iml
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Temporary files
+*~
+*.tmp
+*.temp
