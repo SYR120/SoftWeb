@@ -218,19 +218,21 @@ body {
     border: 1px solid #aaa; 
 }
 
-.dialog.modal1 {
+ /* 박스 */
+dialog.modal1 {
     width: 500px;               
-    height: 800px;          
-    padding: 20px;   
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    display: none;
-    background-color: transparent;
+    height: 800px; 
+    overflow: hidden;
     border: none;
+    border-radius: 8px;
+    box-shadow: 0px 0px 4px rgba(0,0,0,0.2);
+
+    padding: 0px;
+    margin: 0px;
  }
 
-.dialog.modal1::backdrop {
-    background: rgba(0,0,0,0.4);
+dialog.modal1::backdrop {
+    background: transparent;
 }
 
 .modal2 {
@@ -243,34 +245,34 @@ body {
 
 dialog.modal2[open] {
   display: flex !important;
-  flex-direction: column;
+  flex-direction: row;
 }
 
-.dialog.modal2::backdrop {
-    background: rgba(0,0,0,0.4);
+dialog.modal2::backdrop {
+    background: rgba(0,0,0,0.1);
+    backdrop-filter: blur(3px);
 }
 
-.dialog.modal3 {
-    width: 300px;               
-    height: 250px;          
-    padding: 20px;   
+dialog.modal3 {
+    width: 400px;               
+    height: 270px;   
+    border: none;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    display: none;
- }
+    box-shadow: 0px 0px 4px rgba(0,0,0,0.2);
+    overflow: hidden;
 
-.dialog.modal3::backdrop {
-    background: rgba(0,0,0,0.4);
+    padding: 10px;
+    margin: 0px;
+}
+dialog.modal3::backdrop {
+    background: transparent;
 }
 
 .box_friend {
-    position: absolute;
+    position: relative;
     border: 1px solid gray;
     height: 800px;
     width: 600px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -325,6 +327,9 @@ dialog.modal2[open] {
     margin-bottom: 10px;
     font-family: 'Pretendard-Regular';
     border-radius: 4px;
+}
+.button_pro:hover{
+    background-color: rgb(138, 196, 183);
 }
 .middle_pb {
             position: relative;
@@ -397,22 +402,8 @@ input:focus {
     display: flex;  
     flex-direction: column;
 
-    overflow-y: scroll;
+    overflow-y: auto;
 } 
-.box10::-webkit-scrollbar{
-    width: 5px;      
-}
-.box10::-webkit-scrollbar-thumb {
-    background-color: rgba(230, 230, 230);
-    border-radius: 10px;
-}
-.box10::-webkit-scrollbar-thumb:active {
-    background-color: rgba(200, 200, 200);
-    border-radius: 10px;   
-}
-.box10::-webkit-scrollbar-track {
-    background-color: transparent;
-}
 .box10 td, .box10 th {
     height: 45px;
     max-width: 100px;
@@ -480,4 +471,41 @@ input:focus {
 }
 [type="radio"]:checked {
     border: 4px solid rgb(201, 221, 175);
+}
+
+
+.box_introduce{
+    margin-top: 10px;
+    width: 200px;
+    height: 80px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    border: solid 1px rgb(240, 240, 240);
+    border-radius: 5px;
+    padding: 5px;
+    white-space: normal;
+    word-break: break-word;
+}
+
+.box_scroll {
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+}
+.box_scroll::-webkit-scrollbar{
+    width: 5px;      
+}
+.box_scroll::-webkit-scrollbar-thumb {
+    background-color: rgba(230, 230, 230);
+    border-radius: 10px;
+}
+.box_scroll::-webkit-scrollbar-thumb:active {
+    background-color: rgba(200, 200, 200);
+    border-radius: 10px;   
+}
+.box_scroll::-webkit-scrollbar-track {
+    background-color: transparent;
 }

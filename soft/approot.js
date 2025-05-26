@@ -439,7 +439,7 @@
       fetch('/api/auth/logout', { method: 'POST' })
           .then(response => {
               if(response.ok) {
-                  window.location.href=('/front/login.html?logout');
+                  window.location.href=('login.html?logout');
               } else {
                   alert("로그아웃에 실패했습니다. 다시 시도해주세요.");
               }
@@ -475,7 +475,7 @@
                   </div>
               </div>
               <div style="display: flex; justify-content: flex-end; margin:5px 5px 0 0; ">
-                  <button class="button_pro" style="margin-right:5px;" onclick="window.location.href='/front/profile.html'; document.querySelector('.modal3').close();">프로필 수정</button>
+                  <button class="button_pro" style="margin-right:5px;" onclick="window.location.href='profile.html'; document.querySelector('.modal3').close();">프로필 수정</button>
                   <button class="button_pro" onclick="logout()">로그아웃</button>
               </div>
           </div>  
@@ -495,7 +495,7 @@
     }
   
     function openProjectList() {
-      window.location.href=('/front/projectlist.html');
+      window.location.href=('projectlist.html');
     }
   
     function approot() {

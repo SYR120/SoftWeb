@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ProjectList</title>
+    <title>ProjectList</title>
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/styles.css">
     <script src="https://kit.fontawesome.com/289a62abf7.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -199,9 +201,7 @@
         }
         
     </style>
-  <script type="module" crossorigin src="/assets/approot-DZOVlW9M.js"></script>
-  <link rel="stylesheet" crossorigin href="/css/approot.B6dGfGpS.css">
-  <link rel="stylesheet" crossorigin href="/css/bootstrap.CyjhP-aL.css">
+  <script type="module" crossorigin src="/approot.11hueA1V.js"></script>
 </head>
 
 <body>
@@ -221,7 +221,7 @@
             <div style="margin-top:10px; margin-right: 195px;">
                 <label onclick="openFindid()">초대 유저</label>
                 <button style="background-color:rgb(209, 209, 209); border:none; border-radius: 4px;" onclick="openFindid()">유저 찾기</button>
-                <img src="/addfriend.BPC0PnfM.png" style="height: 35px; width:35px;"/>
+                <img src="icon/addfriend.png" style="height: 35px; width:35px;"/>
             </div>
             <div style="margin-top:10px; margin-left: 155px;">
                 <div class="box5">
@@ -229,12 +229,12 @@
                         <thead>
                             <tr>
                                 <th>
-                                    <img src ="/user2.Dp3ZRFZz.png" style="height:25px; width:25px; margin-right:10px;"/>
+                                    <img src ="icon/user2.png" style="height:25px; width:25px; margin-right:10px;"/>
                                 </th>
                                 <th style="font-size: small; font-weight: 100;">닉네임</th>
                                 <th style="font-size: small; font-weight: 100;">#태그</th>
                                 <th>
-                                    <img src="/minus.CgzS0S0S.png" style="height:15px; width:15px; margin-bottom:3px; margin-left: 10px;" class="drag1"/>
+                                    <img src="icon/minus.png" style="height:15px; width:15px; margin-bottom:3px; margin-left: 10px;" class="drag1"/>
                                 </th>
                             </tr>
                         </thead>
@@ -265,7 +265,7 @@
 
                     <div class="find" style="width: 30%; display: flex; align-items: center;">
                         <input class="button_find" type="text" id="find" placeholder="프로젝트 검색" style="font-size: small; width: 400px;"/> 
-                        <img src="/finding.BUuyfvl0.png" style="width: 25px; height: 25px; margin: 5px"/>                    
+                        <img src="icon/finding.png" style="width: 25px; height: 25px; margin: 5px"/>                    
                     </div>
 
                     <button class="button_pj" style="margin-left: auto;" id="addnewproject">새 프로젝트 생성</button> 
@@ -276,7 +276,7 @@
                             <thead>
                                 <tr>
                                     <th>
-                                        <img src="/folder.BqAWSYm-.png" style="height:20px; width:20px;"/>
+                                        <img src="icon/folder.png" style="height:20px; width:20px;"/>
                                     </th>
                                     <th style="font-size: medium; font-weight: 100;" onclick="window.location.href='projectboard.html';">임시 프로젝트 (지울예정)</th>
                                 </tr>
@@ -384,7 +384,7 @@
         const tr = document.createElement("tr");
         tr.innerHTML = `
             <td>
-                <img src="public/icon/folder.png" style="height:20px; width:20px;"/>
+                <img src="icon/folder.png" style="height:20px; width:20px;"/>
             </td>
             <td style="font-size: medium; font-weight: 100;">${title}</td>
         `;
