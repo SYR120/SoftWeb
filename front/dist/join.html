@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>join</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://kit.fontawesome.com/289a62abf7.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <style>
+
+        .button_join1 {
+            background-color:rgba(255, 255, 255, 0);
+            height:40px;
+            width:200px;
+            color:rgb(25, 25, 52);
+            border: 1px solid rgba(0, 0, 0, 0.25);
+            font-size: small;
+            font-weight: 300;   
+            margin-bottom: 10px;
+            border-radius: 4px;
+            font-family: 'Pretendard-Regular';
+        }
+        input:focus {
+        outline: none;
+        background-color: rgba(192, 201, 198, 0.15);
+        }
+        .margin2 {
+            position: absolute;
+            margin-left: 5px;
+            margin-top:13px;
+        }
+        .font1 {
+            color:rgb(127,127,127);
+            font-size: 12px;
+        }
+        .content_w{
+            display: flex; 
+            gap: 10px; 
+            margin-bottom: 10px;
+        }
+        .green {
+            color:rgb(81,123,95);
+            font-size: large;
+            font-weight: 700;
+        }
+    </style>
+  <script type="module" crossorigin src="/approot.u6520Q9i.js"></script>
+  <script type="module" crossorigin src="/imageAssets.l0sNRNKZ.js"></script>
+</head>
+<body style="background-color: rgb(248, 248, 248);">
+    <div id="root"></div>
+
+    <div class="middle">
+        <div class="box" style="height: 500px; background-color: rgb(255, 255, 255);">
+
+            <div class="green">회원가입</div>
+
+             <hr style="background-color: rgba(163, 163, 163, 0.5);  border: none; height: 1px; width: 80%; margin-bottom: 15px;"/>
+
+            &nbsp;
+            
+            <div>
+                <input class="button_join1" type="text" id="id" placeholder="아이디" autofocus/>
+                <label class="font1 drag1 margin2" style="text-decoration: underline;" id="idcheck" onclick="checking()">중복 확인</label> 
+            </div>
+            
+            <input class="button_join1" type="password" id="password" placeholder="비밀번호"/> 
+            <input class="button_join1" type="password" id="pwcheck" placeholder="비밀번호 확인"/> 
+            
+            <div>
+                <input class="button_join1" type="text" id="email" placeholder="이메일"/> 
+                <label class="font1 drag1 margin2" style="text-decoration: underline;" onclick="emailalert()">인증 번호 전송</label>
+            </div>
+            
+            <input class="button_join1" type="text" id="number" placeholder="인증번호"/>
+            <input class="button_join1" type="text" id="nickname" placeholder="닉네임"/> 
+
+            <!-- 
+            <div class="font1">SNS 계정으로 회원가입</div>
+            <div class="content_w">
+                <img src="icon/naver.png" width="25px" height="25px" class="drag1"/>
+                <img src="icon/kakao.png" width="25px" height="25px" class="drag1"/>
+            </div> 
+        -->
+            <button class="button_final drag1" onclick="join()">회원가입</button>
+        </div>
+    </div>
+</body>
+<script>
+
+    let check = false;
+    function checking() {
+        check = true;
+        const idcheck = document.getElementById("idcheck");
+        idcheck.innerText = "중복 확인 완료";
+        idcheck.style.color = "red";
+    }
+
+    function emailalert(){
+        alert("해당 이메일로 인증번호를 전송했습니다.")
+                didClose: () => {
+                    number.focus();
+                }
+    }
+    async function join(){
+            if(id.value.length < 1){
+                alert("아이디를 입력하세요.");
+                id.focus();
+            }
+            else if(id.value.length < 4){
+                alert("아이디는 4자 이상이어야 합니다.");
+                id.focus();
+            }
+            else if(id.value.length > 20){
+                alert("아이디는 20자 이하여야 합니다.");
+                id.focus();
+            }
+            else if(/[^A-Za-z0-9^\-_]/.test(id.value)) {
+                alert("허용되지 않은 특수기호가 사용되었습니다. (허용 특수기호: -,_)");
+                id.focus();
+            }
+            else if(!check){
+                alert("아이디 중복을 확인해주세요.");
+            }
+            //아이디가 중복인지 확인하는 코드 추가해야함
+            else if(password.value.length < 1){
+                alert("비밀번호를 입력하세요.");
+                password.focus();
+            }
+            else if(password.value.length < 8){
+                alert("비밀번호는 8자 이상이어야 합니다.");
+                password.focus();
+            }
+            else if(password.value.length > 20){
+                alert("비밀번호는 20자 이하여야 합니다.");
+                password.focus();
+            }
+            else if (!/[A-Za-z]/.test(password.value)) {
+                alert("비밀번호는 영어, 숫자, 특수문자로 구성되어야 합니다.");
+                password.focus();
+                return;
+            }
+            else if (!/[0-9]/.test(password.value)) {
+                alert("비밀번호는 영어, 숫자, 특수문자로 구성되어야 합니다.");
+                password.focus();
+                return;
+            }
+            else if (!/[!@#$%^&*]/.test(password.value)) {
+                alert("비밀번호는 영어, 숫자, 특수문자로 구성되어야 합니다.");
+                password.focus();
+                return;
+            }
+            else if(/[^A-Za-z0-9!@#$%^&*]/.test(password.value)) {
+                alert("허용되지 않은 특수기호가 사용되었습니다. (허용 특수기호: !@#$%^&*)");
+                password.focus();
+            }
+            else if(password.value !== pwcheck.value){
+                alert("비밀번호가 일치하지 않습니다.");
+                pwcheck.focus();
+            }
+            else if(email.value.length < 1){
+                alert("이메일을 입력해주세요.");
+                email.focus();
+            }
+            //인증번호 전송하는 코드 추가해야함
+            else if(number.value.length < 1){
+                alert("인증번호를 입력해주세요.");
+                number.focus();
+            }
+            else if(nickname.value.length <1){
+                alert("닉네임을 입력해주세요.");
+                nickname.focus();
+            }
+            else if(nickname.value.length < 2){
+                alert("닉네임은 2자 이상이어야 합니다.");
+                nickname.focus();
+            }
+            else if(nickname.value.length > 20){
+                alert("닉네임은 20자 이하여야 합니다.");
+                nickname.focus();
+            }
+            else if(/[^A-Za-z0-9\uAC00-\uD7A3\-_]/.test(nickname.value)) {
+                alert("허용되지 않은 특수기호가 사용되었습니다. (허용 특수기호: -,_)");
+                nickname.focus();
+            }
+            else{
+                alert("회원가입이 완료되었습니다.");
+                window.location.href = "login.html";
+            }
+        }
+    
+</script>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://kit.fontawesome.com/289a62abf7.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+    <style>
+        .button_pro {
+            background-color:rgba(255, 255, 255, 0);
+            height:30px;
+            width:200px;
+            color:rgb(25, 25, 52);
+            border: 1px solid rgba(0, 0, 0, 0.25);
+            font-size: small;
+            font-weight: 300;   
+            margin-bottom: 10px;
+            border-radius: 4px;
+            font-family: 'Pretendard-Regular';
+        }
+        .button_int {
+            background-color:rgba(255, 255, 255, 0);
+            height:80px;
+            width:200px;
+            color:rgb(25, 25, 52);
+            border: 1px solid rgba(0, 0, 0, 0.25);
+            font-size: small;
+            font-weight: 300;   
+            margin-bottom: 10px;
+            border-radius: 4px;
+            font-family: 'Pretendard-Regular';
+        }
+        .margin10 {
+            position: absolute;
+            margin: 10px;
+        }
+
+
+    </style>
+  <script type="module" crossorigin src="/approot.u6520Q9i.js"></script>
+  <script type="module" crossorigin src="/imageAssets.l0sNRNKZ.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <div class="middle">
+        <div class="box" style="height:400px;">
+            <div class="green">프로필 수정</div>
+            <div style="width: 80%;">
+                <hr style="border: 1px solid rgb(0, 0, 0); "/>
+            </div>
+            <div>
+                <img src="icon/user2.png"  style="height: 80px; width: 80px; margin-bottom:10px;"/>
+            </div>
+            <div>
+                <input class="button_pro" type="text" id="nickname" placeholder="닉네임 (2 ~ 20자)" />
+            </div>
+            <div>
+                <input class="button_int" type="text" id="intro" placeholder="자기소개를 입력하세요."/>
+            </div>
+            <div>
+                <button class="button_final" style="width:80px;" onclick="save()">저장</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    async function save(){
+            if(nickname.value.length < 1){
+                alert("닉네임을 입력하세요.")
+                nickname.focus();
+            }
+            else if(nickname.value.length < 2){
+                alert("닉네임은 2자 이상이어야 합니다.");
+                nickname.focus();
+            }
+            else if(nickname.value.length > 20){
+                alert("닉네임은 20자 이하여야 합니다.");
+                nickname.focus();
+            }
+            else if(/[^A-Za-z0-9\uAC00-\uD7A3\-_]/.test(nickname.value)) {
+                alert("허용되지 않은 특수기호가 사용되었습니다. (허용 특수기호: -,_)");
+                nickname.focus();
+            }
+            else{
+                alert("저장되었습니다.")
+                window.location.href = "p"
+            }
+        }
+
+</script>
+</html>
