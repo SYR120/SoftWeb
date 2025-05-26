@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Write work</title>
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/289a62abf7.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <style>
+        .box15{
+            margin-top: 50px;
+            height: 600px;
+            width: 650px;
+            display: flex;  
+            flex-direction: column;
+            border: 1px solid gray;  
+            border-radius: 4px;
+        }
+        .editor-wrapper {
+            width: 100%;
+            flex: 1;
+            min-height: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        #editor {
+            flex: 1;
+            width: 100%;
+            min-height: 0;
+            max-height: 100%;
+            box-sizing: border-box;
+        }
+        .ql-toolbar.ql-snow {
+             display: flex;
+            flex-wrap: wrap;
+        }
+        .mid{
+           margin: 0; 
+           padding: 0; 
+           height: 100vh; 
+           display: flex; 
+           
+        }
+    </style>
+
+</head>
+<body class="mid" style="background-color: rgb(245, 245, 245);">
+    <div id="root"></div>
+    <script type="module" src="approot.js"></script>
+    
+    <div style="flex-direction: column;">
+        <div class="box15">
+            <div style="width:100%"><hr /></div>
+            <div style="margin-left:10px;">
+                <input type="text" id="title" style="width:600px; background-color: rgb(245, 245, 245); border: none; outline: none;"  placeholder="제목" autofocus/>
+            </div>
+            <div style="width:100%"><hr /></div>
+            <div class="editor-wrapper">
+                <div id="editor"></div>
+            </div>
+        </div>
+        <div style="display: flex; justify-content: center; margin-top:5px;">
+            <button class="button_final" style="width:60px; margin-right:10px;">발행</button>
+            <button class="button_final" style="width:60px;" onclick="cancelwrite()">취소</button>
+        </div>
+    </div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script>
+    function cancelwrite(){
+        const result = confirm("작성중인 내용이 저장되지 않을 수 있습니다.");
+        if (result) {
+            window.location.href="worklist.html";
+        } 
+    }
+
+    var toolbarOptions = [
+            ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+            ['blockquote', 'code-block'],
+
+            [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+            [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+            [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+            [{ 'direction': 'rtl' }],                         // text direction
+
+            [{ 'size': ['small', false, 'large'] }],  // custom dropdown
+            [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+            [{ 'font': [] }],
+            [{ 'align': [] }],
+
+            ['clean','image']                   // remove formatting button
+        ];
+        var quill = new Quill('#editor', {
+            modules: {
+                toolbar: toolbarOptions
+            },
+            theme: 'snow'
+        });
+</script>
+</html>

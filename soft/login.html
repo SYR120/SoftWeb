@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://kit.fontawesome.com/289a62abf7.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script type="module" src="src/images.js"></script>
+    
+    <style>
+        .button_login1 {
+            background-color:rgba(168, 168, 168, 0);
+            height:40px;
+            width:200px;
+            color:rgb(25, 25, 52);
+            border: 1px solid rgba(180, 180, 180);
+            font-size: small;
+            font-weight: 300;   
+            margin-bottom: 10px;
+            border-radius: 4px;
+            font-family: 'Pretendard-Regular';
+        }
+        input:focus {
+            outline: none;
+            background-color: rgb(245, 245, 245);
+        }
+        .button_naver {
+            background-color:rgb(3, 199, 90);
+            height:40px;
+            width:200px;
+            color:rgb(255, 255, 255);
+            border: none;
+            font-size: medium;
+            font-weight: 200; 
+            margin-bottom: 10px;
+            border-radius: 4px;
+            font-family: 'Pretendard-Regular';
+            display:flex;
+            align-items:center;
+            justify-content: center;
+        }
+        .button_naver img { margin-right: 8px; }
+        .button_naver:active { background-color: rgb(16, 170, 63); }  
+        .button_kakao {
+            background-color: rgb(254,229,0);
+            height:40px;
+            width:200px;
+            color:rgb(25,25,25);
+            border: none;
+            font-size: medium;
+            font-weight: 200;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            font-family: 'Pretendard-Regular';
+            display:flex;
+            align-items:center;
+            justify-content: center;
+        }
+        .button_kakao img { margin-right: 8px; }
+        .button_kakao:active { background-color: rgb(236, 207, 37); }
+        .font1:hover { color: rgb(55,158,144); }
+
+        /* 추가: 메시지 표시 영역 스타일  */
+        #loginErrorMessage { 
+            color: red; /* 기본은 에러 색상 */
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            min-height: 1.2em; /* 메시지 없을 때 레이아웃 유지 */
+            text-align: center;
+            width: 200px; 
+        }
+    </style>
+</head>
+<body style="background-color: rgb(248, 248, 248);">
+    <div id="root"></div>
+    <script type="module" src="approot.js"></script>
+
+    <div class="middle">
+        <div class="box">
+            <div class="green">로그인</div>
+            <hr style="background-color: rgba(163, 163, 163, 0.5);  border: none; height: 1px; width: 80%; margin-bottom: 15px;"/>
+            &nbsp;
+            <div id="loginErrorMessage"></div> <form action="/api/auth/perform_login" method="post" style="display: flex; flex-direction: column; align-items: center;">
+                <input class="button_login1" type="text" id="loginId" name="loginId" placeholder=" 아이디" autofocus required/> 
+                <input class="button_login1" type="password" id="password" name="password" placeholder=" 비밀번호" required/>
+                <button type="submit" class="button_final drag1" style="margin-bottom: 10px;">로그인</button>
+            </form>
+
+            <div class="content_w" style="margin-top: 5px;">
+                <div class="font1 drag1" onclick="window.location.href='/front/join.html';">회원가입</div>
+                <div style="border: 0.1px solid rgba(163, 163, 163, 0.5); height: 100%;"></div>
+                <div class="font1 drag1" onclick="window.location.href='/front/findmyid.html';">아이디 찾기</div>
+                <div style="border: 0.1px solid rgba(163, 163, 163, 0.5);"></div>
+                <div class="font1 drag1" onclick="window.location.href='/front/findmypw.html';">비밀번호 찾기</div>
+            </div>
+            <div style="width:50%; margin-bottom: 10px;">
+                <hr style="background-color: rgba(163, 163, 163, 0.5);  border: none; height: 1px; margin-bottom: 15px;"/>
+            </div>
+
+            <button class="button_naver drag1" onclick="location.href='/oauth2/authorization/naver'"><img src="icon/naver_icon.png" width="25px" height="25px"/> <span>네이버 로그인</span> </button>
+            <button class="button_kakao drag1" onclick="location.href='/oauth2/authorization/kakao'"><img src="icon/kakao2.png" width="15px" height="15px"/> <span>카카오 로그인</span> </button>
+        </div>
+    </div>
+</body>
+<script>
+    window.addEventListener('load', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const messageDiv = document.getElementById("loginErrorMessage");
+        let message = null;
+
+        if (messageDiv) {
+            if (urlParams.has('error')) {
+                message = "아이디 또는 비밀번호가 잘못되었습니다. 다시 시도해주세요.";
+                messageDiv.style.color = "red"; // CSS에 기본값이 있지만, 명시적으로 설정
+            } else if (urlParams.has('expired')) {
+                message = "세션이 만료되었거나 다른 곳에서 로그인하여 기존 세션이 종료되었습니다.";
+                messageDiv.style.color = "red";
+            } else if (urlParams.has('logout')) {
+                message = "로그아웃되었습니다.";
+                messageDiv.style.color = "green";
+            }
+
+            if (message) {
+                messageDiv.textContent = message;
+            }
+
+            if (urlParams.has('error') || urlParams.has('expired') || urlParams.has('logout')) {
+                 window.history.replaceState({}, document.title, window.location.pathname + window.location.hash);
+            }
+        }
+    });
+</script>
+</html>

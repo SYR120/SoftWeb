@@ -9,58 +9,35 @@ export default defineConfig({
     outDir: resolve(__dirname, '../back/src/main/resources/static'),
     // =======================
     emptyOutDir: true, //백엔드의 static 폴더를 빌드 전에 비움
+    cssCodeSplit: false,
     rollupOptions: {
       input: {
-        index: resolve(__dirname, 'front/index.html'),
-        login: resolve(__dirname, 'front/login.html'),
-        join:  resolve(__dirname, 'front/join.html'),
-        profile: resolve(__dirname, 'front/profile.html'),
-        findmyid: resolve(__dirname, 'front/findmyid.html'),
-        findmypw: resolve(__dirname, 'front/findmypw.html'),
-        projectboard: resolve(__dirname, 'front/projectboard.html'),
-        projectmanage: resolve(__dirname, 'front/projectmanage.html'),
-        projectlist: resolve(__dirname, 'front/projectlist.html'),
-        worklist: resolve(__dirname, 'front/worklist.html'),
-        writework: resolve(__dirname, 'front/writework.html'),
+        index: resolve(__dirname, 'index.html'),
+        login: resolve(__dirname, 'login.html'),
+        join:  resolve(__dirname, 'join.html'),
+        profile: resolve(__dirname, 'profile.html'),
+        findmyid: resolve(__dirname, 'findmyid.html'),
+        findmypw: resolve(__dirname, 'findmypw.html'),
+        projectboard: resolve(__dirname, 'projectboard.html'),
+        projectmanage: resolve(__dirname, 'projectmanage.html'),
+        projectlist: resolve(__dirname, 'projectlist.html'),
+        worklist: resolve(__dirname, 'worklist.html'),
+        writework: resolve(__dirname, 'writework.html'),
+        imageAssets: resolve(__dirname, 'src/images.js'),
       },
       output: {
-        assetFileNames(info) {
-            const name = info.name;
-            if (!name) {
-                return 'assets/[name].[hash][extname]';
-            }
-            if (name.startsWith('front/icon/')) {
-                return '[name][extname]';
-            }
-            if (name.endsWith('.css')){
-                return 'css/[name].[hash][extname]';    
-            }
+        entryFileNames: '[name].[hash].js', 
+        chunkFileNames: '[name].[hash].js',
+        assetFileNames: (info) => {
+          const ext = info.name?.split('.').pop();
 
-            if (/\.(png|jpe?g|svg|json)$/.test(name)) {
-                const parts = name.split('/');
-                const file  = parts.pop();          
-                const dir   = parts.join('/');   
-                    
-                const match = file.match(/^(.*)(\.[^\.]+)$/);
-                if (match) {
-                    const [, base, ext] = match;
-                    return dir
-                    ? `${dir}/${base}.[hash]${ext}`
-                    : `${base}.[hash]${ext}`;
-                }
-                return `${file}.[hash]`;
-            }
-            return 'assets/[name].[hash][extname]';
+          if (ext === 'png') {
+            return 'assets/icon/[name].[hash].[ext]';
+          }
+          return 'assets/[name].[hash].[ext]';
         }
+
       }
     }
-  },
-  plugins: [
-    viteStaticCopy({
-      targets: [
-        { src: 'front/public/css',  dest: '' },  
-        { src: 'front/public/icon', dest: '' }
-      ]
-    })
-  ]
+  }
 });

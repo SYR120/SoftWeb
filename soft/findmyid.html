@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find my ID</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://kit.fontawesome.com/289a62abf7.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script type="module" src="src/images.js"></script>
+    
+    <style>
+        .button_find {
+            background-color:rgba(255, 255, 255, 0);
+            height:40px;
+            width:300px;
+            color:rgb(25, 25, 52);
+            border: 1px solid rgba(0, 0, 0, 0.25);
+            font-size: small;
+            font-weight: 300;   
+            margin-bottom: 10px;
+            border-radius: 4px;
+            font-family: 'Pretendard-Regular';
+        }
+        input:focus {
+            outline: none;
+            background-color: rgb(245, 245, 245);
+        }
+        /* 메시지 표시를 위한 스타일 추가 */
+        #findIdMessage {
+            margin-top: 15px;
+            font-size: 0.9em;
+            min-height: 1.2em; /* 메시지가 없을 때도 공간 유지 */
+        }
+    </style>
+</head>
+<body style="background-color: rgb(248, 248, 248);">
+    <div id="root"></div>
+    <script type="module" src="approot.js"></script>
+
+    <div class="middle">
+        <div class="box" style="height:320px;"> 
+            <div class="green">아이디 찾기</div>
+            <hr style="background-color: rgba(163, 163, 163, 0.5);  border: none; height: 1px; width: 80%; margin-bottom: 15px;"/>
+            <div style="display: flex; flex-direction: column; justify-content: flex-start; width: 300px;">
+                <div style="font-weight: bold; margin-top: 15px;">가입한 아이디의 이메일 정보를 입력해주세요.</div>
+                <div class="font1" style="margin-top: 8px;">※ SNS 로그인을 통해 가입한 아이디는 찾기가 불가능합니다.</div>                
+            </div>  
+            &nbsp;
+            <input class="button_find" type="text" id="email" placeholder=" 이메일"/> 
+            <button class="button_final" style="width:130px; margin-top: 30px;" onclick="findingid()">아이디 찾기</button>
+            <div id="findIdMessage"></div> </div>
+    </div>
+</body>
+
+<script>
+    function openalert() { console.log("findmyid.html - openalert called"); }
+    function openfriend() { console.log("findmyid.html - openfriend called"); }
+    function openmypage() { console.log("findmyid.html - openmypage called"); }
+
+    async function findingid() {
+        const emailInput = document.getElementById("email");
+        const messageDiv = document.getElementById("findIdMessage");
+
+        if (messageDiv) {
+            messageDiv.textContent = '';
+            messageDiv.style.color = 'gray';
+        }
+
+        if (!emailInput) {
+            alert("오류: 이메일 입력 필드를 찾을 수 없습니다.");
+            return;
+        }
+        const email = emailInput.value.trim();
+
+        if (email.length < 1) {
+            alert("이메일을 입력하세요.");
+            emailInput.focus();
+            return;
+        }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            alert("올바른 이메일 형식이 아닙니다.");
+            emailInput.focus();
+            return;
+        }
+
+        if (messageDiv) messageDiv.textContent = "요청을 처리 중입니다...";
+        else alert("요청을 처리 중입니다...");
+
+        try {
+            const response = await fetch('/api/auth/find-id', { // 백엔드 API 경로
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email: email })
+            });
+            const result = await response.json();
+
+            if (response.ok && result.status === 200) {
+                if (messageDiv) {
+                    messageDiv.textContent = result.message || "입력하신 이메일로 아이디 정보를 발송했습니다.";
+                    messageDiv.style.color = "green";
+                } else {
+                    alert(result.message || "입력하신 이메일로 아이디 정보를 발송했습니다.");
+                }
+            } else {
+                const errorMessage = result.message || `아이디 찾기 요청 실패 (상태: ${response.status})`;
+                if (messageDiv) {
+                    messageDiv.textContent = errorMessage;
+                    messageDiv.style.color = "red";
+                } else {
+                    alert(errorMessage);
+                }
+            }
+        } catch (error) {
+            console.error("Error during find ID:", error);
+            const networkErrorMsg = "아이디 찾기 처리 중 오류가 발생했습니다. 네트워크를 확인해주세요.";
+            if (messageDiv) {
+                messageDiv.textContent = networkErrorMsg;
+                messageDiv.style.color = "red";
+            } else {
+                alert(networkErrorMsg);
+            }
+        }
+    }
+</script>
+</html>
