@@ -5,6 +5,7 @@ import { viteStaticCopy } from 'vite-plugin-static-copy';
 export default defineConfig({
 
   build: {
+    //outDir: 'dist', //soft/disk에 수정
     // === 경로 수정된 부분 ===
     outDir: resolve(__dirname, '../back/src/main/resources/static'),
     // =======================
@@ -39,5 +40,5 @@ export default defineConfig({
 
       }
     }
-  }
+  },
 });

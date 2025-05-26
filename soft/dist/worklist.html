@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>work</title>
+    <title>work</title>
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/styles.css">
     <script src="https://kit.fontawesome.com/289a62abf7.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -155,9 +157,7 @@
         }
 
     </style>
-  <script type="module" crossorigin src="/assets/approot-eWCPX4A1.js"></script>
-  <link rel="stylesheet" crossorigin href="/css/approot.B6dGfGpS.css">
-  <link rel="stylesheet" crossorigin href="/css/bootstrap.CyjhP-aL.css">
+  <script type="module" crossorigin src="/approot.6-GWV15r.js"></script>
 </head>
 <body class="mid" style="background-color: rgb(195, 195, 195); overflow-y: scroll;">
     <div id="root"></div>
@@ -178,7 +178,7 @@
                             <div style="font-weight: bold; font-size:25px;">제목</div>
                             <div style="display: flex;">
                                 <div style="margin:5px;">
-                                    <img src="/user2.Dp3ZRFZz.png" style="height: 30px; width: 30px;"/>
+                                    <img src="icon/user2.png" style="height: 30px; width: 30px;"/>
                                 </div>
                                 <div>
                                     <div style="font-size: 15px;">작성자</div>
@@ -191,7 +191,7 @@
                             <div style="display: flex; justify-content: space-between; align-items: center;">
                                 <div></div>
                                 <div>
-                                    <img src="/link.CZlXJVt1.png" style="height:20px; width:20px;"/>
+                                    <img src="icon/link.png" style="height:20px; width:20px;"/>
                                     <a style="font-size: small; color: rgb(105, 105, 105)">파일 다운로드</a>
                                 </div>
                             </div>
@@ -201,7 +201,7 @@
                         </div>
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-top:5px;">
                             <div style="margin-left:5px; display: flex;">
-                                <img src = "/comment.DcOv8ESk.png" style="height:25px; width:25px;"/>
+                                <img src = "icon/comment.png" style="height:25px; width:25px;"/>
                                 <div style="font-size: small; color: rgb(105, 105, 105); margin-top:2px;" id="comcount">0</div>
                             </div>
                             <div style="display: flex; justify-content: end;"> 
@@ -215,7 +215,7 @@
                         <div style="display: flex;">
                             <div style="flex-direction: column; margin:5px;" id="commentlist">
                                 <!-- <div style="margin-left:5px;">
-                                    <img src="public/icon/user2.png" style="height: 30px; width: 30px;" id="userimage"/>
+                                    <img src="icon/user2.png" style="height: 30px; width: 30px;" id="userimage"/>
                                 </div>
                                 <div style="flex-direction: column; margin-left:5px;">
                                     <div style="font-size: 15px;" id="usernickname">사과 #1231</div>
@@ -232,7 +232,7 @@
                                     <hr style="border: 1px solid rgb(160, 160, 160);" />
                                 </div>
                                 <div style="display: flex; justify-content: space-between; align-items: center;">
-                                        <img src="/link.CZlXJVt1.png" style="height:20px; width:20px;"/>
+                                        <img src="icon/link.png" style="height:20px; width:20px;"/>
                                         <button class="button_work2" style="width:70px;" onclick="addcomment()">등록</button>
                                 </div>
                             </div>
@@ -289,7 +289,7 @@
                         <div style="display: flex; background-color: white; padding: 15px;">
                             <div style="font-weight: bold; font-size:15px;">게시글</div>
                             <div style="display: flex; align-items: center; margin-left: auto;">
-                                <img src="/writing.DcsJ7GJR.png" style="height:20px; width:20px; margin-left:80px;"/>
+                                <img src="icon/writing.png" style="height:20px; width:20px; margin-left:80px;"/>
                                 <div class="drag1" style="text-decoration: underline; margin-left:5px;" onclick="window.location.href='writework.html';">글쓰기</div> 
                             </div>                                
                         </div>   
@@ -349,7 +349,7 @@
         com.className="commentlist";
         com.innerHTML = `
             <div style="display:flex;">
-                <img src="public/icon/user2.png" style="height: 25px; width: 25px;" id="userimage"/>
+                <img src="icon/user2.png" style="height: 25px; width: 25px;" id="userimage"/>
                 <div style="font-size: 15px; margin-left:5px;" id="usernickname">나</div>
             </div>
             <div style="margin-left:35px; margin-top:5px;">
